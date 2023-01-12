@@ -3,6 +3,10 @@ package com.novatec;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class MainPage {
 
@@ -30,20 +34,20 @@ public class MainPage {
         element.click();
     }
 
-    public void openMenu() throws InterruptedException {
+    public void openMenu() {
         WebElement element = webDriver.findElement(By.xpath(MENU_TOGGLE_XPATH));
 
         element.click();
-
-        Thread.sleep(1000);
     }
 
-    public CareerPage clickCareerLink() throws InterruptedException {
+    public CareerPage clickCareerLink() {
+        WebDriverWait wt = new WebDriverWait(webDriver, Duration.ofSeconds(1));
+
+        wt.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CAREER_LINK_XPATH)));
+
         WebElement element = webDriver.findElement(By.xpath(CAREER_LINK_XPATH));
 
         element.click();
-
-        Thread.sleep(1000);
 
         return new CareerPage(webDriver);
     }

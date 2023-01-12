@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertTrue;
+import java.time.Duration;
 
 public class CareerPage {
 
@@ -27,22 +29,20 @@ public class CareerPage {
         element.click();
     }
 
-    public void scrollDownToTheJobList() throws InterruptedException {
+    public void scrollDownToTheJobList() {
         WebElement jobList = webDriver.findElement(By.xpath(JOB_LIST_XPATH));
 
-        assertTrue(jobList.isDisplayed());
-
         new Actions(webDriver).moveToElement(jobList).perform();
-
-        Thread.sleep(5 * 1000);
     }
 
-    public JobPage clickOnTheFirstJobItem() throws InterruptedException {
+    public JobPage clickOnTheFirstJobItem() {
+        WebDriverWait wt = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+
+        wt.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(JOB_ITEM_XPATH)));
+
         WebElement element = webDriver.findElement(By.xpath(JOB_ITEM_XPATH));
 
         element.click();
-
-        Thread.sleep(1000);
 
         return new JobPage(webDriver);
     }
