@@ -37,11 +37,13 @@ public class CareerPage {
         Thread.sleep(5 * 1000);
     }
 
-    public void clickOnTheFirstJobItem() throws InterruptedException {
+    public JobPage clickOnTheFirstJobItem() throws InterruptedException {
         WebElement element = webDriver.findElement(By.xpath(JOB_ITEM_XPATH));
 
         element.click();
 
         Thread.sleep(1000);
+
+        return new JobPage(webDriver);
     }
 }

@@ -8,19 +8,13 @@ public class JobPage {
 
     private static final String APPLY_BUTTON_TEXT = "Jetzt bewerben";
 
-    private final WebDriver webDriver;
-
-    private WebElement applyButton;
+    private final WebElement applyButton;
 
     public JobPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
-    }
-
-    public void init() {
         applyButton = webDriver.findElement(By.linkText(APPLY_BUTTON_TEXT));
     }
 
-    public void clickApplyButton() throws InterruptedException {
+    public void clickApplyJobButton() throws InterruptedException {
         applyButton.click();
 
         Thread.sleep(1000);

@@ -12,18 +12,9 @@ public class NovatecTest {
 
     private static WebDriver webDriver;
 
-    private static MainPage mainPage;
-
-    private static CareerPage careerPage;
-
-    private static JobPage jobPage;
-
     @BeforeClass
     public static void beforeClass(){
         webDriver = new ChromeDriver();
-        mainPage = new MainPage(webDriver);
-        careerPage = new CareerPage(webDriver);
-        jobPage = new JobPage(webDriver);
     }
 
     @AfterClass
@@ -32,25 +23,25 @@ public class NovatecTest {
     }
 
     @Test
-    public void applyButtonIsClickable() throws InterruptedException {
+    public void applyJobButtonIsClickable() throws InterruptedException {
+        MainPage mainPage = new MainPage(webDriver);
+
         mainPage.open();
 
         mainPage.acceptCookies();
 
         mainPage.openMenu();
 
-        mainPage.clickCareerLink();
+        CareerPage careerPage = mainPage.clickCareerLink();
 
         careerPage.declineCookies();
 
         careerPage.scrollDownToTheJobList();
 
-        careerPage.clickOnTheFirstJobItem();
+        JobPage jobPage = careerPage.clickOnTheFirstJobItem();
 
-        jobPage.init();
+        jobPage.clickApplyJobButton();
 
-        jobPage.clickApplyButton();
-
-        assertFalse("Apply button is still displayed", jobPage.isDisplayedApplyButton());
+        assertFalse("Apply job button is still displayed", jobPage.isDisplayedApplyButton());
     }
 }
